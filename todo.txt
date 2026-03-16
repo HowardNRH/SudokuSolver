@@ -1,0 +1,5 @@
+To Do:
+File to turn text into data structure
+  - list for cols, rows, and grids?
+Solver function
+  - funciton to find all possible answers from the 3 lists

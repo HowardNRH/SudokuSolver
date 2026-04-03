@@ -11,25 +11,29 @@
 )
 
 
-; works
 (defun make-rows (puzzle)
   (loop for i from 0 below 81 by 9
         collect (subseq puzzle i (+ i 9))))
-(format t "Rows: ~A~%" (make-rows *puzzle*))
 
-; works
 (defun make-cols (rows)
   (loop for c from 0 below 9
         collect
           (loop for r from 0 below 9
                 collect (nth c (nth r rows)))))
-(format t "~%Cols: ~A~%" (make-cols (make-rows *puzzle*)))
 
-; works
 (defun make-grids (rows)
   (loop for gr from 0 below 3 append
         (loop for gc from 0 below 3 collect
               (loop for r from (* gr 3) below (+ (* gr 3) 3) append
                     (loop for c from (* gc 3) below (+ (* gc 3) 3)
                           collect (nth c (nth r rows)))))))
-(format t "~%Grids: ~A~%" (make-grids (make-rows *puzzle*)))
+
+(defun update (puzzle)
+  (let* ((rows (make-rows puzzle))
+         (cols (make-cols rows))
+         (grids (make-grids rows)))
+    (list rows cols grids)))
+
+(format t "Rows: ~A~%" (first (update *puzzle*)))
+(format t "~%Cols: ~A~%" (second (update *puzzle*)))
+(format t "~%Grids: ~A~%" (third (update *puzzle*)))

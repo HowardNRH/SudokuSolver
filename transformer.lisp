@@ -9,8 +9,8 @@
         while char 
         for digit = (digit-char-p char)
         when digit
-        do (setf *puzzle* (append *puzzle* (list digit))))
-    )))
+          do (setf *puzzle* (append *puzzle* (list digit))))
+)))
 
 (filePrint "easyPreset.txt")
 (format t "~A~%" *puzzle*)

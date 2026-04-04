@@ -11,29 +11,33 @@
 )
 
 
-(defun make-rows (puzzle)
+(defun makeRows (puzzle)
   (loop for i from 0 below 81 by 9
-        collect (subseq puzzle i (+ i 9))))
+    collect (subseq puzzle i (+ i 9))))
 
-(defun make-cols (rows)
+(defun makeCols (rows)
   (loop for c from 0 below 9
-        collect
-          (loop for r from 0 below 9
-                collect (nth c (nth r rows)))))
+    collect
+    (loop for r from 0 below 9
+      collect (nth c (nth r rows)))))
 
-(defun make-grids (rows)
+(defun makeGrids (rows)
   (loop for gr from 0 below 3 append
-        (loop for gc from 0 below 3 collect
-              (loop for r from (* gr 3) below (+ (* gr 3) 3) append
-                    (loop for c from (* gc 3) below (+ (* gc 3) 3)
-                          collect (nth c (nth r rows)))))))
+    (loop for gc from 0 below 3 collect
+      (loop for r from (* gr 3) below (+ (* gr 3) 3) append
+        (loop for c from (* gc 3) below (+ (* gc 3) 3)
+          collect (nth c (nth r rows)))))))
 
 (defun update (puzzle)
-  (let* ((rows (make-rows puzzle))
-         (cols (make-cols rows))
-         (grids (make-grids rows)))
+  (let* ((rows (makeRows puzzle))
+         (cols (makeCols rows))
+         (grids (makeGrids rows)))
     (list rows cols grids)))
 
 (format t "Rows: ~A~%" (first (update *puzzle*)))
 (format t "~%Cols: ~A~%" (second (update *puzzle*)))
 (format t "~%Grids: ~A~%" (third (update *puzzle*)))
+
+;rows is (first (update *puzzle*))
+;cols is (second (update *puzzle*))
+;grids is (third (update *puzzle*))

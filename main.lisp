@@ -1,5 +1,5 @@
 ; Nick Howard
-; April 4, 2025
+; April 26, 2025
 ; CS2100 Project
 ; Common Lisp Sudoku SOlver
 
@@ -19,7 +19,9 @@
           do (setf *puzzle* (append *puzzle* (list digit))))
 )))
 
-(filePrint "easyPreset.txt")
+(format t "Enter input file name: ")
+(finish-output)
+(filePrint (read-line))
 
 
 
